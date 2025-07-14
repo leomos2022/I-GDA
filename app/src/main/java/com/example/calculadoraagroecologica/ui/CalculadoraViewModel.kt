@@ -27,6 +27,51 @@ class CalculadoraViewModel(app: Application) : AndroidViewModel(app) {
 
     private val DATA_KEY = stringPreferencesKey("calculadora_json")
 
+    // Factores para modo de adquisición
+    private val modoFactor = mapOf(
+        "Produce" to 1.0f,
+        "Cambia" to 1.2f,
+        "Compra" to 1.5f
+    )
+    // Factores para medio de transporte
+    private val transporteFactor = mapOf(
+        "Pie/Bici" to 1.0f,
+        "Camión" to 1.3f,
+        "Barco" to 1.8f,
+        "Avión" to 3.0f
+    )
+
+    // Cálculo de WD_i para cada alimento
+    fun calcularWD(alimento: Alimento): Float {
+        val d = alimento.km
+        val m = modoFactor[alimento.modo] ?: 1.5f
+        val t = transporteFactor[alimento.transporte] ?: 1.3f
+        return d * m * t
+    }
+
+    // Cálculo de I_GDA
+    fun calcularIGDA(): Float {
+        val alimentos = _uiState.value.alimentos
+        val n = alimentos.size
+        val pd = _uiState.value.pais.pd.takeIf { it > 0 } ?: 1f
+        if (n == 0) return 0f
+        val sumaWD = alimentos.sumOf { calcularWD(it).toDouble() }
+        val igda = ((sumaWD / n) / pd).toFloat()
+        return igda.coerceAtLeast(0f)
+    }
+
+    // Clasificación según I_GDA
+    fun clasificacionIGDA(): Pair<Int, String> {
+        val igda = calcularIGDA()
+        return when {
+            igda <= 0.25f -> 1 to "Local"
+            igda <= 0.50f -> 2 to "Regional"
+            igda <= 1.00f -> 3 to "Nacional"
+            igda <= 2.00f -> 4 to "Continental"
+            else -> 5 to "Internacional"
+        }
+    }
+
     init {
         viewModelScope.launch { loadData() }
     }

@@ -17,6 +17,7 @@ data class Alimento(
     val nivel: String = "",
     val categoria: String = "",
     val modo: String = "Compra",
+    val transporte: String = "Camión", // Nuevo campo para el medio de transporte
     val valorAcumulado: Int = 0
 )
 

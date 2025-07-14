@@ -130,6 +130,8 @@ fun Modulo5Screen(
         
         alimentos.forEachIndexed { i, alimento ->
             var expanded by remember { mutableStateOf(false) }
+            var transporteExpanded by remember { mutableStateOf(false) }
+            val transporteOpciones = listOf("Pie/Bici", "Camión", "Barco", "Avión")
             
             Column(
                 modifier = Modifier
@@ -188,7 +190,6 @@ fun Modulo5Screen(
                             )
                         }
                     }
-                    
                     // Menú desplegable
                     DropdownMenu(
                         expanded = expanded,
@@ -219,6 +220,66 @@ fun Modulo5Screen(
                                 onClick = {
                                     alimentos[i] = alimento.copy(modo = option)
                                     expanded = false
+                                },
+                                modifier = Modifier.fillMaxWidth()
+                            )
+                        }
+                    }
+                }
+                // Dropdown para seleccionar el transporte
+                Spacer(Modifier.height(8.dp))
+                Box(
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Button(
+                        onClick = { transporteExpanded = true },
+                        colors = ButtonDefaults.buttonColors(
+                            containerColor = if (alimento.transporte.isBlank()) 
+                                Color(0xFFFFF3E0) // Naranja claro cuando no hay selección
+                            else 
+                                Color(0xFFFB8C00), // Naranja cuando hay selección
+                            contentColor = if (alimento.transporte.isBlank()) 
+                                Color(0xFFFB8C00) // Naranja para texto
+                            else 
+                                Color.White // Blanco para texto
+                        ),
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.SpaceBetween,
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Text(
+                                text = if (alimento.transporte.isBlank()) "Selecciona el transporte" else alimento.transporte,
+                                fontWeight = androidx.compose.ui.text.font.FontWeight.Medium
+                            )
+                            Icon(
+                                imageVector = if (transporteExpanded) 
+                                    androidx.compose.material.icons.Icons.Default.KeyboardArrowUp 
+                                else 
+                                    androidx.compose.material.icons.Icons.Default.KeyboardArrowDown,
+                                contentDescription = "Expandir menú transporte",
+                                tint = if (alimento.transporte.isBlank()) 
+                                    Color(0xFFFB8C00) 
+                                else 
+                                    Color.White
+                            )
+                        }
+                    }
+                    DropdownMenu(
+                        expanded = transporteExpanded,
+                        onDismissRequest = { transporteExpanded = false },
+                        modifier = Modifier
+                            .fillMaxWidth(0.95f)
+                            .background(colors.surface)
+                    ) {
+                        transporteOpciones.forEach { option ->
+                            DropdownMenuItem(
+                                text = { Text(option, color = colors.onSurface, fontSize = 16.sp) },
+                                onClick = {
+                                    alimentos[i] = alimento.copy(transporte = option)
+                                    transporteExpanded = false
                                 },
                                 modifier = Modifier.fillMaxWidth()
                             )

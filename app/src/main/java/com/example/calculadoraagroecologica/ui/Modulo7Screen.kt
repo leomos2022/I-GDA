@@ -39,6 +39,8 @@ fun Modulo7Screen(
     val headerColor = if (colors.isLight()) colors.primary else colors.onBackground
     val isDark = !colors.isLight()
     val resultTextColor = if (isDark) Color.White else CharcoalGray
+    val igda = viewModel.calcularIGDA()
+    val (indiceClasificacion, tipoAlimentacion) = viewModel.clasificacionIGDA()
 
     Column(
         modifier = Modifier
@@ -58,6 +60,44 @@ fun Modulo7Screen(
             textAlign = TextAlign.Center,
             modifier = Modifier.fillMaxWidth()
         )
+        
+        Spacer(Modifier.height(16.dp))
+        // Fila alineada para índice y tipo de alimentación
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+            Text(
+                text = "Índice i-GDA",
+                color = resultTextColor,
+                fontSize = 16.sp,
+                fontWeight = androidx.compose.ui.text.font.FontWeight.Bold
+            )
+            Text(
+                text = "Tipo de alimentación:",
+                color = resultTextColor,
+                fontSize = 16.sp,
+                fontWeight = androidx.compose.ui.text.font.FontWeight.Bold
+            )
+        }
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+            Text(
+                text = "${"%.2f".format(igda)}",
+                color = EcoGreen,
+                fontSize = 28.sp,
+                fontWeight = androidx.compose.ui.text.font.FontWeight.Bold
+            )
+            Text(
+                text = tipoAlimentacion,
+                color = EcoGreen,
+                fontSize = 20.sp,
+                fontWeight = androidx.compose.ui.text.font.FontWeight.Bold
+            )
+        }
+        Spacer(Modifier.height(24.dp))
         
         Spacer(Modifier.height(32.dp))
         

@@ -1,49 +1,73 @@
-# 🥗 I-GDA - Índice de Dependencia Alimentaria
+# 🌱 Calculadora Agroecológica
 
-**I-GDA** es una calculadora agroecológica interactiva desarrollada en Android con Kotlin + Jetpack Compose. Esta app guía a comunidades y usuarios rurales o académicos a calcular el Índice de Dependencia Alimentaria (I-GDA) a partir de datos reales sobre sus prácticas de consumo, producción y transporte de alimentos.
+![Portada](app/src/main/res/drawable/trigo.jpg)
 
----
+## ¿Qué es la Calculadora Agroecológica?
 
-## 🎥 Demo en video
-
-Mira el funcionamiento completo de la aplicación en este video demostrativo:
-
-🔗 [Ver demo en Google Drive](https://drive.google.com/file/d/1z1U7sqgOOtlcgIAYLuZBDkb5I6eagQi4/view?usp=sharing)
-
-> El video muestra la navegación entre módulos, uso de la API de ChatGPT, interfaz adaptable a modo claro/oscuro, entradas personalizadas de alimentos, selección de métodos de adquisición y cálculo automático del I-GDA.
+La **Calculadora Agroecológica** es una aplicación móvil desarrollada para Android que permite a comunidades, productores, investigadores y consumidores analizar y visualizar la dependencia alimentaria de su dieta o territorio. Utiliza el índice I-GDA (Índice de Globo-Dependencia Alimentaria) para cuantificar la procedencia de los alimentos y su impacto en la soberanía alimentaria y la sostenibilidad.
 
 ---
 
-## 🧭 Flujo de módulos
+## 🌍 Importancia de la Aplicación
 
-| Módulo | Descripción |
-|--------|-------------|
-| 🌍 Módulo 1 | Ingreso de país y dimensiones geográficas (con consulta automática vía ChatGPT). |
-| 🍽️ Módulo 2 | Registro de alimentos consumidos. |
-| 📏 Módulo 3 | Ingreso de distancias desde los puntos de origen. |
-| 🚚 Módulo 4 | Selección del medio de transporte utilizado. |
-| 🛒 Módulo 5 | Método de adquisición: Compra, Cambia o Produce. |
-| 📊 Módulo 6 | Cálculo del índice basado en variables ponderadas. |
-| 📈 Módulo 7 | Visualización de resultados y recomendaciones finales. |
+- **Promueve la soberanía alimentaria:** Ayuda a identificar si la dieta es local, regional, nacional o internacional.
+- **Fomenta la sostenibilidad:** Visualiza el impacto de la distancia y el transporte de los alimentos.
+- **Herramienta educativa:** Facilita la comprensión de conceptos clave en agroecología y consumo responsable.
+- **Apoyo a la toma de decisiones:** Útil para comunidades, escuelas, ONGs y políticas públicas.
 
 ---
 
-## ⚙️ Tecnología utilizada
+## 📲 ¿Cómo se usa?
 
-- ✅ **Lenguaje:** Kotlin
-- ✅ **Framework UI:** Jetpack Compose
-- ✅ **Arquitectura:** ViewModel + StateFlow
-- ✅ **Persistencia temporal:** MutableState y remember
-- ✅ **Lógica de IA:** OpenAI ChatGPT API (consulta automatizada)
-- ✅ **Compatibilidad UI:** Light/Dark Theme con `MaterialTheme`
-- ✅ **Diseño adaptable:** UI centrado, accesibilidad visual
-- ✅ **Componentes personalizados:** Dropdowns dinámicos, barra de progreso visual, validación de entrada
+1. **Ingreso de datos:** El usuario introduce los alimentos consumidos, su origen (distancia), modo de adquisición y medio de transporte.
+2. **Cálculo automático:** La app calcula el índice I-GDA y clasifica la dieta según la procedencia de los alimentos.
+3. **Visualización de resultados:** Se muestran tablas y gráficos con los kilómetros recorridos, el valor acumulado por alimento y la clasificación final.
+4. **Interpretación:** El usuario puede analizar si su dieta es local, regional, nacional, continental o internacional, y reflexionar sobre posibles mejoras.
 
 ---
 
-## 📐 Lógica matemática
+## 🛠️ Desarrollo
 
-**Fórmula estimada de PD (Parámetro de Distancia):**
+- **Plataforma:** Android (Kotlin, Jetpack Compose)
+- **Arquitectura:** MVVM (Model-View-ViewModel)
+- **Persistencia:** DataStore para almacenamiento local
+- **Interfaz:** Moderna, intuitiva y adaptada a dispositivos móviles
+- **Cálculo:** Implementa la fórmula científica del I-GDA, considerando distancia, modo de adquisición y transporte
 
-```math
-PD = (Largo del país + Ancho del país) / 2
+---
+
+## 📈 ¿Cómo abordar los resultados?
+
+- **Índice I-GDA:** Un valor entre 1 y 5, donde 1 es local y 5 es internacional.
+- **Tipo de alimentación:** Clasificación automática según el índice.
+- **Tablas y resúmenes:** Analiza los alimentos que más contribuyen a la dependencia externa.
+- **Reflexión:** Usa los resultados para promover cambios hacia una dieta más local y sostenible.
+
+---
+
+## 🚀 Instalación y uso
+
+1. **Clona el repositorio:**
+   ```bash
+   git clone https://github.com/tuusuario/CalculadoraAgroecologica.git
+   ```
+2. **Abre el proyecto en Android Studio.**
+3. **Ejecuta la app en un emulador o dispositivo físico.**
+4. **Para compartir la app:**  
+   Genera el APK desde Android Studio (`Build > Build APK(s)`) y compártelo con otros usuarios.
+
+---
+
+## 🖼️ Imagen de portada
+
+La imagen de portada representa la conexión entre la producción agrícola y la alimentación, simbolizando la importancia de conocer el origen de nuestros alimentos para avanzar hacia sistemas alimentarios más justos y sostenibles.
+
+---
+
+## 📧 Contacto
+
+¿Tienes dudas, sugerencias o quieres colaborar?  
+
+---
+
+**¡Juntos por una alimentación más local, justa y sostenible!**
