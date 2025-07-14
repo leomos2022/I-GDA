@@ -1,8 +1,8 @@
-# 🌱 Calculadora Agroecológica
+# 🌱 I-GDA Indice de Dependencia Alimentaria
 
 ![Portada](app/src/main/res/drawable/trigo.jpg)
 
-## ¿Qué es la Calculadora Agroecológica?
+## ¿Qué es El Indice de Dependencia Alimentaria?
 
 La **Calculadora Agroecológica** es una aplicación móvil desarrollada para Android que permite a comunidades, productores, investigadores y consumidores analizar y visualizar la dependencia alimentaria de su dieta o territorio. Utiliza el índice I-GDA (Índice de Globo-Dependencia Alimentaria) para cuantificar la procedencia de los alimentos y su impacto en la soberanía alimentaria y la sostenibilidad.
 
