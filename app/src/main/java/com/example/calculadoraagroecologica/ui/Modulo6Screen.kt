@@ -24,6 +24,7 @@ import com.example.calculadoraagroecologica.ui.CalculadoraViewModel
 import com.example.calculadoraagroecologica.ui.model.Alimento
 import androidx.compose.ui.graphics.luminance
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
 
 @Composable
 fun Modulo6Screen(
@@ -63,9 +64,18 @@ fun Modulo6Screen(
         Spacer(Modifier.height(32.dp))
         
         Text(
-            text = "Módulo 6: Cálculo de valor acumulado por alimento",
-            color = headerColor,
-            style = MaterialTheme.typography.titleLarge,
+            text = "Módulo 6",
+            color = colors.onBackground,
+            fontSize = 28.sp,
+            fontWeight = FontWeight.Bold,
+            textAlign = TextAlign.Center,
+            modifier = Modifier.fillMaxWidth()
+        )
+        Text(
+            text = "Cálculo de valor acumulado por alimento",
+            color = colors.onBackground,
+            fontSize = 20.sp,
+            fontWeight = FontWeight.Normal,
             textAlign = TextAlign.Center,
             modifier = Modifier.fillMaxWidth()
         )
@@ -170,7 +180,10 @@ fun Modulo6Screen(
         Spacer(Modifier.height(12.dp))
         
         Button(
-            onClick = onNext,
+            onClick = {
+                viewModel.updateAlimentos(resultados)
+                onNext()
+            },
             colors = ButtonDefaults.buttonColors(containerColor = colors.primary),
             modifier = Modifier.fillMaxWidth(0.8f)
         ) {

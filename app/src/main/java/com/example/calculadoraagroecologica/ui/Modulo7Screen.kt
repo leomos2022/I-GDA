@@ -22,6 +22,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.ui.graphics.luminance
 import androidx.navigation.NavController
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
 
 @Composable
 fun Modulo7Screen(
@@ -54,9 +55,18 @@ fun Modulo7Screen(
         Spacer(Modifier.height(32.dp))
         
         Text(
-            text = "Módulo 7: Resultados finales",
-            color = headerColor,
-            style = MaterialTheme.typography.titleLarge,
+            text = "Módulo 7",
+            color = colors.onBackground,
+            fontSize = 28.sp,
+            fontWeight = FontWeight.Bold,
+            textAlign = TextAlign.Center,
+            modifier = Modifier.fillMaxWidth()
+        )
+        Text(
+            text = "Resultados finales",
+            color = colors.onBackground,
+            fontSize = 20.sp,
+            fontWeight = FontWeight.Normal,
             textAlign = TextAlign.Center,
             modifier = Modifier.fillMaxWidth()
         )

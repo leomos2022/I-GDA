@@ -25,6 +25,8 @@ import com.example.calculadoraagroecologica.ui.theme.CharcoalGray
 import com.example.calculadoraagroecologica.ui.theme.StoneGray
 import com.example.calculadoraagroecologica.ui.CalculadoraViewModel
 import com.example.calculadoraagroecologica.ui.model.Alimento
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
 
 @Composable
 fun Modulo2Screen(viewModel: CalculadoraViewModel, onNext: () -> Unit) {
@@ -45,9 +47,18 @@ fun Modulo2Screen(viewModel: CalculadoraViewModel, onNext: () -> Unit) {
         Spacer(Modifier.height(32.dp))
         
         Text(
-            text = "🍽️ Módulo 2: Ingreso de alimentos",
-            color = colors.primary,
-            fontSize = 22.sp,
+            text = "Módulo 2",
+            color = colors.onBackground,
+            fontSize = 28.sp,
+            fontWeight = FontWeight.Bold,
+            textAlign = TextAlign.Center,
+            modifier = Modifier.fillMaxWidth()
+        )
+        Text(
+            text = "Ingreso de alimentos",
+            color = colors.onBackground,
+            fontSize = 20.sp,
+            fontWeight = FontWeight.Normal,
             textAlign = TextAlign.Center,
             modifier = Modifier.fillMaxWidth()
         )

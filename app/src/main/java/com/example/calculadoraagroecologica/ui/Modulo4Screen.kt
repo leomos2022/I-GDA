@@ -24,6 +24,8 @@ import com.example.calculadoraagroecologica.ui.theme.StoneGray
 import com.example.calculadoraagroecologica.ui.CalculadoraViewModel
 import com.example.calculadoraagroecologica.ui.model.Alimento
 import androidx.compose.ui.graphics.luminance
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
 
 @Composable
 fun Modulo4Screen(
@@ -60,9 +62,18 @@ fun Modulo4Screen(
     ) {
         Spacer(Modifier.height(32.dp))
         Text(
-            text = "Módulo 4: Registro de kilómetros por alimento",
-            color = headerColor,
-            style = MaterialTheme.typography.titleLarge,
+            text = "Módulo 4",
+            color = colors.onBackground,
+            fontSize = 28.sp,
+            fontWeight = FontWeight.Bold,
+            textAlign = TextAlign.Center,
+            modifier = Modifier.fillMaxWidth()
+        )
+        Text(
+            text = "Registro de kilómetros por alimento",
+            color = colors.onBackground,
+            fontSize = 20.sp,
+            fontWeight = FontWeight.Normal,
             textAlign = TextAlign.Center,
             modifier = Modifier.fillMaxWidth()
         )
@@ -126,7 +137,10 @@ fun Modulo4Screen(
         Spacer(Modifier.height(12.dp))
         
         Button(
-            onClick = onNext,
+            onClick = {
+                viewModel.updateAlimentos(alimentos.toList())
+                onNext()
+            },
             colors = ButtonDefaults.buttonColors(containerColor = colors.primary),
             modifier = Modifier.fillMaxWidth(0.8f)
         ) {
@@ -138,7 +152,7 @@ fun Modulo4Screen(
 }
 
 // Extensión para convertir Tablas a Map<String, Map<String, Float>>
-private fun com.example.calculadoraagroecologica.ui.model.Tablas.toMap(): Map<String, Map<String, Float>> = mapOf(
+fun com.example.calculadoraagroecologica.ui.model.Tablas.toMap(): Map<String, Map<String, Float>> = mapOf(
     "Mundial" to mundial,
     "Continental" to continental,
     "Nacional" to nacional,

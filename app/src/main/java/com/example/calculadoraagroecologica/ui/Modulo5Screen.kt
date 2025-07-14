@@ -34,6 +34,7 @@ import com.example.calculadoraagroecologica.ui.theme.StoneGray
 import com.example.calculadoraagroecologica.ui.CalculadoraViewModel
 import com.example.calculadoraagroecologica.ui.model.Alimento
 import androidx.compose.ui.graphics.luminance
+import androidx.compose.ui.text.font.FontWeight
 
 @Composable
 fun Modulo5Screen(
@@ -83,8 +84,17 @@ fun Modulo5Screen(
         }
         Text(
             text = "Módulo 5",
-            color = headerColor,
-            style = MaterialTheme.typography.headlineMedium, // Más grande, más título
+            color = colors.onBackground,
+            fontSize = 28.sp,
+            fontWeight = FontWeight.Bold,
+            textAlign = TextAlign.Center,
+            modifier = Modifier.fillMaxWidth()
+        )
+        Text(
+            text = "Modo de adquisición y transporte",
+            color = colors.onBackground,
+            fontSize = 20.sp,
+            fontWeight = FontWeight.Normal,
             textAlign = TextAlign.Center,
             modifier = Modifier.fillMaxWidth()
         )

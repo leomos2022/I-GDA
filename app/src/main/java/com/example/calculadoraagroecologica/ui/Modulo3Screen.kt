@@ -98,7 +98,7 @@ fun Modulo3Screen(
     ) {
         Spacer(Modifier.height(24.dp))
         Text(
-            text = "📏 Módulo 3: Generación de tablas de distancia",
+            text = "Módulo 3: Generación de tablas de distancia",
             color = Color.White,
             fontSize = 28.sp,
             fontWeight = FontWeight.Bold,
@@ -231,13 +231,3 @@ fun Modulo3Screen(
         Spacer(Modifier.height(32.dp))
     }
 }
-
-// Extensión para convertir Tablas a Map<String, Map<String, Float>>
-private fun Tablas.toMap(): Map<String, Map<String, Float>> = mapOf(
-    "Mundial" to mundial,
-    "Continental" to continental,
-    "Nacional" to nacional,
-    "Regional" to regional,
-    "Zonal" to zonal,
-    "Local" to local
-) 
