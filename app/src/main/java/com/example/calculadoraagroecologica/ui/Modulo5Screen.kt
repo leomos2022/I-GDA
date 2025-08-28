@@ -48,7 +48,7 @@ fun Modulo5Screen(
     val alimentos = remember { mutableStateListOf<Alimento>().apply { addAll(uiState.alimentos) } }
     val opciones = listOf("Compra", "Cambia", "Produce")
     val colors = MaterialTheme.colorScheme
-    val headerColor = if (colors.isLight()) colors.primary else colors.onBackground
+    val headerColor = colors.primary
 
     Column(
         modifier = Modifier

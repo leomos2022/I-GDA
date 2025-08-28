@@ -18,7 +18,9 @@ data class Alimento(
     val categoria: String = "",
     val modo: String = "Compra",
     val transporte: String = "Camión", // Nuevo campo para el medio de transporte
-    val valorAcumulado: Int = 0
+    val valorAcumulado: Int = 0,
+    val huellaCarbono: Float = 0f,
+    val sostenibilidad: String = "Media"
 )
 
 @Serializable

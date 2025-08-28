@@ -37,8 +37,8 @@ fun Modulo7Screen(
     val totalValor = alimentos.sumOf { it.valorAcumulado }
     val promedioValor = if (alimentos.isNotEmpty()) totalValor / alimentos.size else 0
     val colors = MaterialTheme.colorScheme
-    val headerColor = if (colors.isLight()) colors.primary else colors.onBackground
-    val isDark = !colors.isLight()
+    val headerColor = colors.primary
+    val isDark = colors.background.luminance() < 0.5f
     val resultTextColor = if (isDark) Color.White else CharcoalGray
     val igda = viewModel.calcularIGDA()
     val (indiceClasificacion, tipoAlimentacion) = viewModel.clasificacionIGDA()

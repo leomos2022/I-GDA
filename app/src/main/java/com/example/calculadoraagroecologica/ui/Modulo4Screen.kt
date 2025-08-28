@@ -39,7 +39,7 @@ fun Modulo4Screen(
     val tablas = uiState.tablas
     val alimentos = remember { mutableStateListOf<Alimento>().apply { addAll(uiState.alimentos) } }
     val colors = MaterialTheme.colorScheme
-    val headerColor = if (colors.isLight()) colors.primary else colors.onBackground
+    val headerColor = colors.primary
 
     fun clasificarAlimento(km: Float): Pair<String, String> {
         for ((nivel, datos) in tablas.toMap()) {

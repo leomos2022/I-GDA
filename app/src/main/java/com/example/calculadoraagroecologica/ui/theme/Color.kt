@@ -2,6 +2,7 @@ package com.example.calculadoraagroecologica.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
+// Colores del sistema Material Design
 val md_theme_light_primary = Color(0xFF476810)
 val md_theme_light_onPrimary = Color(0xFFFFFFFF)
 val md_theme_light_primaryContainer = Color(0xFFC7F089)
@@ -20,6 +21,7 @@ val md_theme_dark_surface = Color(0xFF1A1C18)
 val md_theme_dark_onBackground = Color(0xFFC7F089)
 val md_theme_dark_onSurface = Color(0xFFC7F089)
 
+// Colores legacy (mantener para compatibilidad)
 val Purple80 = Color(0xFFD0BCFF)
 val PurpleGrey80 = Color(0xFFCCC2DC)
 val Pink80 = Color(0xFFEFB8C8)
@@ -28,12 +30,14 @@ val Purple40 = Color(0xFF6650a4)
 val PurpleGrey40 = Color(0xFF625b71)
 val Pink40 = Color(0xFF7D5260)
 
+// Colores base del tema
 val GreenPrimary = Color(0xFF4CAF50)
 val GreenDark = Color(0xFF388E3C)
 val GrayBackground = Color(0xFF222222)
 val GraySurface = Color(0xFF333333)
 val WhiteText = Color(0xFFFFFFFF)
 
+// Paleta ecológica mejorada
 val EcoGreen = Color(0xFF43A047) // Verde ecológico
 val CarrotOrange = Color(0xFFFB8C00) // Naranja zanahoria
 val PaleYellow = Color(0xFFFFF9C4) // Amarillo pálido
@@ -41,9 +45,9 @@ val SoftLeafGreen = Color(0xFFAED581) // Verde hoja suave
 val TomatoRed = Color(0xFFE53935) // Rojo tomate
 val WaterBlue = Color(0xFF4FC3F7) // Azul claro agua
 val StoneGray = Color(0xFFF5F5F5) // Gris piedra claro
-val CharcoalGray = Color(0xFF263238) // Gris carbón16650
+val CharcoalGray = Color(0xFF263238) // Gris carbón
 
-// Pastel palette for light theme
+// Paleta pastel mejorada para tema claro
 val PastelGreen = Color(0xFFD6F5D6)
 val PastelYellow = Color(0xFFF9F9C5)
 val PastelPink = Color(0xFFFDE2E4)
@@ -54,8 +58,31 @@ val ButtonGreen = Color(0xFF5A8F6A)
 val ButtonText = Color(0xFFFFFFFF)
 val PastelDark = Color(0xFF476810)
 
-// Dark theme variants
-val DarkBackground = Color(0xFF222222)
-val DarkSurface = Color(0xFF333333)
-val DarkPrimary = Color(0xFF476810)
-val DarkOnPrimary = Color(0xFFF8FBEF)
+// Tema oscuro mejorado
+val DarkBackground = Color(0xFF1A1C18)
+val DarkSurface = Color(0xFF2D2F2A)
+val DarkPrimary = Color(0xFFACD370)
+val DarkOnPrimary = Color(0xFF1A1C18)
+
+// Colores de estado y feedback
+val SuccessGreen = Color(0xFF4CAF50)
+val WarningOrange = Color(0xFFFF9800)
+val ErrorRed = Color(0xFFF44336)
+val InfoBlue = Color(0xFF2196F3)
+
+// Colores de sostenibilidad
+val SostenibilidadAlta = Color(0xFF4CAF50) // Verde
+val SostenibilidadMedia = Color(0xFFFF9800) // Amarillo
+val SostenibilidadBaja = Color(0xFFF44336) // Rojo
+
+// Colores de contraste mejorados para accesibilidad
+val HighContrastText = Color(0xFF000000)
+val HighContrastBackground = Color(0xFFFFFFFF)
+val MediumContrastText = Color(0xFF424242)
+val LowContrastText = Color(0xFF757575)
+
+// Colores de superficie y contenedores
+val SurfaceVariant = Color(0xFFE8F5E8)
+val SurfaceVariantDark = Color(0xFF2D2F2A)
+val ContainerColor = Color(0xFFF0F7F0)
+val ContainerColorDark = Color(0xFF1E201B)
