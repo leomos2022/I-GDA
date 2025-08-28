@@ -70,7 +70,7 @@ fun Modulo4Screen(
             modifier = Modifier.fillMaxWidth()
         )
         Text(
-            text = "Registro de kilómetros por alimento",
+            text = "Índice de Dependencia Alimentaria",
             color = colors.onBackground,
             fontSize = 20.sp,
             fontWeight = FontWeight.Normal,

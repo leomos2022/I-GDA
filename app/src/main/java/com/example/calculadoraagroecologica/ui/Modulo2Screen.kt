@@ -55,7 +55,7 @@ fun Modulo2Screen(viewModel: CalculadoraViewModel, onNext: () -> Unit) {
             modifier = Modifier.fillMaxWidth()
         )
         Text(
-            text = "Ingreso de alimentos",
+            text = "Índice de Dependencia Alimentaria",
             color = colors.onBackground,
             fontSize = 20.sp,
             fontWeight = FontWeight.Normal,

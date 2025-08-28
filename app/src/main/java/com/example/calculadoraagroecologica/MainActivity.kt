@@ -76,7 +76,7 @@ class MainActivity : ComponentActivity() {
                         TopAppBar(
                             title = { 
                                 Text(
-                                    "🌱 I-GDA Calculadora Agroecológica",
+                                    "🌱 I-GDA Índice de Dependencia Alimentaria",
                                     style = MaterialTheme.typography.titleMedium,
                                     fontWeight = FontWeight.Bold
                                 )

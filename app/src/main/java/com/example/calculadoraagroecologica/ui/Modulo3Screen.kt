@@ -98,7 +98,7 @@ fun Modulo3Screen(
     ) {
         Spacer(Modifier.height(24.dp))
         Text(
-            text = "Módulo 3: Generación de tablas de distancia",
+            text = "Módulo 3: Índice de Dependencia Alimentaria",
             color = Color.White,
             fontSize = 28.sp,
             fontWeight = FontWeight.Bold,

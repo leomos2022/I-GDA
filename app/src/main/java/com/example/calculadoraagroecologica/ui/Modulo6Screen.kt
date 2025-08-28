@@ -90,9 +90,9 @@ fun Modulo6Screen(
                     fontWeight = FontWeight.Bold,
                     textAlign = TextAlign.Center
                 )
-                Spacer(Modifier.height(8.dp))
+                Spacer(modifier = Modifier.height(8.dp))
                 Text(
-                    text = "Cálculo de Valor Acumulado y Sostenibilidad",
+                    text = "Índice de Dependencia Alimentaria",
                     color = colors.onPrimaryContainer,
                     fontSize = 18.sp,
                     fontWeight = FontWeight.Medium,

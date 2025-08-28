@@ -91,7 +91,7 @@ fun Modulo5Screen(
             modifier = Modifier.fillMaxWidth()
         )
         Text(
-            text = "Modo de adquisición y transporte",
+            text = "Índice de Dependencia Alimentaria",
             color = colors.onBackground,
             fontSize = 20.sp,
             fontWeight = FontWeight.Normal,

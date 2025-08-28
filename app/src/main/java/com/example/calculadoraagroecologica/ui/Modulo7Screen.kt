@@ -63,7 +63,7 @@ fun Modulo7Screen(
             modifier = Modifier.fillMaxWidth()
         )
         Text(
-            text = "Resultados finales",
+            text = "Índice de Dependencia Alimentaria",
             color = colors.onBackground,
             fontSize = 20.sp,
             fontWeight = FontWeight.Normal,

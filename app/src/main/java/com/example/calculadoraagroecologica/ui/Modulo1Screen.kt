@@ -62,7 +62,7 @@ fun Modulo1Screen(
                 )
                 Spacer(modifier = Modifier.height(8.dp))
                 Text(
-                    text = "Ubicación del País",
+                    text = "Índice de Dependencia Alimentaria",
                     color = colors.onPrimaryContainer,
                     fontSize = 18.sp,
                     fontWeight = FontWeight.Medium,
