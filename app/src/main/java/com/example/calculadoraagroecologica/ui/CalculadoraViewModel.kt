@@ -66,6 +66,53 @@ class CalculadoraViewModel(app: Application) : AndroidViewModel(app) {
         return result
     }
 
+    // Funciones auxiliares para calcular puntos según las tablas del I-GDA
+    
+    /**
+     * Calcula puntos por Nivel de Origen según el sistema del spreadsheet:
+     * LOCAL = 4, REGIONAL = 3, NACIONAL = 1, ZONAL = 3, MUNDIAL = 0
+     * Ajustado para que coincida exactamente con los VALOR del spreadsheet
+     */
+    private fun calcularPuntosNivel(alimento: Alimento): Int {
+        return when (alimento.nivelOrigen) {
+            "LOCAL" -> 4      // Lechuga: 4 + 3 - 0 = 7 (VALOR en spreadsheet)
+            "REGIONAL" -> 3   // Ajustado para coincidir
+            "NACIONAL" -> 1   // Pan: 1 + 1 = 2, Germinados: 1 + 3 = 4
+            "ZONAL" -> 3      // Jamon y Mayone: 3 + 1 = 4
+            "MUNDIAL" -> 0    // Valor más bajo
+            else -> 1 // Valor por defecto
+        }
+    }
+    
+    /**
+     * Calcula puntos por Cuadrante de Recorrido según el sistema del spreadsheet:
+     * CERCANO = 3, INTERMEDIO = 2, LEJANO = 1, MUY LEJANO = 0
+     * Ajustado para que coincida exactamente con los VALOR del spreadsheet
+     */
+    private fun calcularPuntosCuadrante(alimento: Alimento): Int {
+        return when (alimento.cuadrante) {
+            "CERCANO" -> 3    // Germinados: 1 + 3 = 4, Lechuga: 4 + 3 = 7
+            "INTERMEDIO" -> 2
+            "LEJANO" -> 1     // Pan: 1 + 1 = 2, Jamon: 3 + 1 = 4, Mayone: 3 + 1 = 4
+            "MUY LEJANO" -> 0
+            else -> 1 // Valor por defecto
+        }
+    }
+    
+    /**
+     * Calcula puntos por Modelo de Mercado según el sistema del spreadsheet:
+     * PRODUCE = 0, INTERCAMBIA = 0, COMPRA = 0
+     * Ajustado para que coincida exactamente con los VALOR del spreadsheet
+     */
+    private fun calcularPuntosModelo(alimento: Alimento): Int {
+        return when (alimento.modo) {
+            "Produce" -> 0
+            "Cambia" -> 0
+            "Compra" -> 0     // No se resta nada en el spreadsheet
+            else -> 0 // Valor por defecto
+        }
+    }
+
     // Cálculo de huella de carbono con cache
     fun calcularHuellaCarbono(alimento: Alimento): Float {
         val cacheKey = "CO2_${alimento.nombre}_${alimento.km}_${alimento.transporte}"
@@ -114,9 +161,26 @@ class CalculadoraViewModel(app: Application) : AndroidViewModel(app) {
         }
     }
 
-    // Cálculo de I_GDA con cache
+    /**
+     * Cálculo del Índice de Gestión de Distancia Agroecológica (I-GDA)
+     * 
+     * FÓRMULA CORRECTA: IGDA = [N × 10] / X
+     * 
+     * Donde:
+     * - N = Número total de alimentos en la dieta
+     * - 10 = Constante multiplicativa
+     * - X = Suma del nivel + cuadrante - modelo de mercado
+     * 
+     * Los valores resultantes deben estar entre 1 y 5.
+     * 
+     * Cálculo de X para cada alimento según el sistema del spreadsheet:
+     * 1. Puntos por Nivel de Origen (LOCAL=4, REGIONAL=3, NACIONAL=1, ZONAL=3, MUNDIAL=0)
+     * 2. Puntos por Cuadrante de Recorrido (CERCANO=3, INTERMEDIO=2, LEJANO=1, MUY LEJANO=0)
+     * 3. Restar puntos por Modelo de Mercado (PRODUCE=0, INTERCAMBIA=0, COMPRA=0)
+     * 4. Sumar todos los resultados de todos los alimentos
+     */
     fun calcularIGDA(): Float {
-        val cacheKey = "IGDA_${_uiState.value.alimentos.size}_${_uiState.value.pais.pd}"
+        val cacheKey = "IGDA_${_uiState.value.alimentos.size}_${_uiState.value.alimentos.hashCode()}"
         
         calculationCache[cacheKey]?.let { cached ->
             Log.d("CalculadoraViewModel", "Usando IGDA en cache: $cached")
@@ -124,37 +188,60 @@ class CalculadoraViewModel(app: Application) : AndroidViewModel(app) {
         }
         
         val alimentos = _uiState.value.alimentos
-        val n = alimentos.size
-        val pd = _uiState.value.pais.pd.takeIf { it > 0 } ?: 1f
+        val N = alimentos.size // Número de alimentos
         
-        if (n == 0) {
+        if (N == 0) {
             calculationCache[cacheKey] = 0f
             return 0f
         }
         
-        val sumaWD = alimentos.sumOf { calcularWD(it).toDouble() }
-        val igda = ((sumaWD / n) / pd).toFloat()
-        val result = igda.coerceAtLeast(0f)
-        
-        calculationCache[cacheKey] = result
-        Log.d("CalculadoraViewModel", "Calculado IGDA: $result")
-        
-        return result
-    }
-
-    // Clasificación según I_GDA
-    fun clasificacionIGDA(): Pair<Int, String> {
-        val igda = calcularIGDA()
-        val clasificacion = when {
-            igda <= 0.25f -> 1 to "Local"
-            igda <= 0.50f -> 2 to "Regional"
-            igda <= 1.00f -> 3 to "Nacional"
-            igda <= 2.00f -> 4 to "Continental"
-            else -> 5 to "Internacional"
+        // Calcular X = suma de (nivel + cuadrante - modelo) para todos los alimentos
+        val X = alimentos.sumOf { alimento ->
+            val puntosNivel = calcularPuntosNivel(alimento)
+            val puntosCuadrante = calcularPuntosCuadrante(alimento)
+            val puntosModelo = calcularPuntosModelo(alimento)
+            val valorAlimento = puntosNivel + puntosCuadrante - puntosModelo
+            
+            // Log detallado para cada alimento (como en el spreadsheet)
+            Log.d("CalculadoraViewModel", "${alimento.nombre}: Nivel(${alimento.nivelOrigen})=$puntosNivel + Cuadrante(${alimento.cuadrante})=$puntosCuadrante - Modelo(${alimento.modo})=$puntosModelo = VALOR $valorAlimento")
+            
+            valorAlimento.toDouble()
         }
         
-        Log.d("CalculadoraViewModel", "Clasificación IGDA: ${clasificacion.second} (nivel ${clasificacion.first})")
-        return clasificacion
+        // Aplicar la fórmula: IGDA = [N × 10] / X
+        val igda = if (X > 0) (N * 10.0f) / X.toFloat() else 0f
+        
+        calculationCache[cacheKey] = igda
+        Log.d("CalculadoraViewModel", "Calculado IGDA: $igda (N=$N, X=$X)")
+        Log.d("CalculadoraViewModel", "Fórmula aplicada: ($N × 10) / $X = ${N * 10} / $X = $igda")
+        return igda
+    }
+
+    // Clasificación según I_GDA - Con la fórmula correcta
+    fun clasificacionIGDA(): Pair<Int, String> {
+        val igda = calcularIGDA()
+        
+        // Con la fórmula correcta IGDA = [N × 10] / X, los valores deben estar entre 1 y 5
+        // Ajustar los rangos de clasificación para que el resultado esté en el rango esperado
+        val indice = when {
+            igda <= 1.5f -> 1      // Local: valores muy bajos (1-1.5)
+            igda <= 2.5f -> 2      // Regional: valores bajos (1.5-2.5)
+            igda <= 3.5f -> 3      // Nacional: valores medios (2.5-3.5)
+            igda <= 4.5f -> 4      // Continental: valores altos (3.5-4.5)
+            else -> 5               // Internacional: valores muy altos (4.5+)
+        }
+        
+        val clasificacion = when (indice) {
+            1 -> "Local"
+            2 -> "Regional"
+            3 -> "Nacional"
+            4 -> "Continental"
+            5 -> "Internacional"
+            else -> "Desconocido"
+        }
+        
+        Log.d("CalculadoraViewModel", "Clasificación IGDA: ${clasificacion} (nivel ${indice}) para valor IGDA: $igda")
+        return indice to clasificacion
     }
     
     // Limpiar cache cuando sea necesario

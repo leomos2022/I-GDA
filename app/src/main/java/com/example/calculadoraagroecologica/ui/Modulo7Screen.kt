@@ -6,6 +6,8 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -78,13 +80,19 @@ fun Modulo7Screen(
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
             Text(
-                text = "Índice i-GDA",
+                text = "Valor IGDA:",
                 color = resultTextColor,
                 fontSize = 16.sp,
                 fontWeight = androidx.compose.ui.text.font.FontWeight.Bold
             )
             Text(
-                text = "Tipo de alimentación:",
+                text = "Índice (1-5):",
+                color = resultTextColor,
+                fontSize = 16.sp,
+                fontWeight = androidx.compose.ui.text.font.FontWeight.Bold
+            )
+            Text(
+                text = "Clasificación:",
                 color = resultTextColor,
                 fontSize = 16.sp,
                 fontWeight = androidx.compose.ui.text.font.FontWeight.Bold
@@ -97,7 +105,13 @@ fun Modulo7Screen(
             Text(
                 text = "${"%.2f".format(igda)}",
                 color = EcoGreen,
-                fontSize = 28.sp,
+                fontSize = 24.sp,
+                fontWeight = androidx.compose.ui.text.font.FontWeight.Bold
+            )
+            Text(
+                text = "$indiceClasificacion",
+                color = EcoGreen,
+                fontSize = 24.sp,
                 fontWeight = androidx.compose.ui.text.font.FontWeight.Bold
             )
             Text(
@@ -108,6 +122,53 @@ fun Modulo7Screen(
             )
         }
         Spacer(Modifier.height(24.dp))
+        
+        // Explicación de los valores
+        Card(
+            modifier = Modifier.fillMaxWidth(),
+            colors = CardDefaults.cardColors(
+                containerColor = colors.surfaceVariant.copy(alpha = 0.3f)
+            )
+        ) {
+            Column(
+                modifier = Modifier.padding(16.dp)
+            ) {
+                Text(
+                    text = "📊 Explicación de los valores:",
+                    color = EcoGreen,
+                    fontSize = 16.sp,
+                    fontWeight = FontWeight.Bold
+                )
+                Spacer(Modifier.height(8.dp))
+                Text(
+                    text = "• Valor IGDA: Medida de dependencia alimentaria (fórmula: N×10/X)",
+                    color = resultTextColor,
+                    fontSize = 14.sp
+                )
+                Text(
+                    text = "• Índice: Clasificación del 1 al 5 según el valor IGDA",
+                    color = resultTextColor,
+                    fontSize = 14.sp
+                )
+                Text(
+                    text = "• Clasificación: Tipo de alimentación según la dependencia",
+                    color = resultTextColor,
+                    fontSize = 14.sp
+                )
+                Spacer(Modifier.height(8.dp))
+                Text(
+                    text = "📋 Fórmula: IGDA = (N × 10) / X",
+                    color = EcoGreen,
+                    fontSize = 14.sp,
+                    fontWeight = FontWeight.Bold
+                )
+                Text(
+                    text = "Donde: N = número de alimentos, X = suma de puntos",
+                    color = resultTextColor,
+                    fontSize = 12.sp
+                )
+            }
+        }
         
         Spacer(Modifier.height(32.dp))
         

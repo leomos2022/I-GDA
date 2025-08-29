@@ -20,7 +20,10 @@ data class Alimento(
     val transporte: String = "Camión", // Nuevo campo para el medio de transporte
     val valorAcumulado: Int = 0,
     val huellaCarbono: Float = 0f,
-    val sostenibilidad: String = "Media"
+    val sostenibilidad: String = "Media",
+    // Nuevos campos para el cálculo correcto del I-GDA
+    val nivelOrigen: String = "NACIONAL", // LOCAL, REGIONAL, NACIONAL, ZONAL, MUNDIAL
+    val cuadrante: String = "INTERMEDIO"  // CERCANO, INTERMEDIO, LEJANO, MUY LEJANO
 )
 
 @Serializable

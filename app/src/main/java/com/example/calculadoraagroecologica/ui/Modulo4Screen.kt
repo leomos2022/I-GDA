@@ -1,6 +1,7 @@
 package com.example.calculadoraagroecologica.ui
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
@@ -10,8 +11,11 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
+import androidx.compose.material3.DropdownMenu
+import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.*
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
@@ -80,6 +84,7 @@ fun Modulo4Screen(
         Spacer(Modifier.height(32.dp))
         
         alimentos.forEachIndexed { i, alimento ->
+            // Campo de distancia
             OutlinedTextField(
                 value = if (alimento.km == 0f) "" else alimento.km.toString(),
                 onValueChange = { newKm ->
@@ -93,6 +98,71 @@ fun Modulo4Screen(
                     .fillMaxWidth()
                     .padding(vertical = 8.dp)
             )
+            
+            // Selector para Nivel de Origen
+            var nivelOrigenExpanded by remember { mutableStateOf(false) }
+            val nivelOrigenOpciones = listOf("LOCAL", "REGIONAL", "NACIONAL", "ZONAL", "MUNDIAL")
+            
+            Box(modifier = Modifier.fillMaxWidth()) {
+                OutlinedTextField(
+                    value = alimento.nivelOrigen,
+                    onValueChange = {},
+                    readOnly = true,
+                    label = { Text("Nivel de Origen") },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(vertical = 4.dp)
+                        .clickable { nivelOrigenExpanded = true }
+                )
+                
+                DropdownMenu(
+                    expanded = nivelOrigenExpanded,
+                    onDismissRequest = { nivelOrigenExpanded = false }
+                ) {
+                    nivelOrigenOpciones.forEach { option ->
+                        DropdownMenuItem(
+                            text = { Text(option) },
+                            onClick = {
+                                alimentos[i] = alimento.copy(nivelOrigen = option)
+                                nivelOrigenExpanded = false
+                            }
+                        )
+                    }
+                }
+            }
+            
+            // Selector para Cuadrante de Recorrido
+            var cuadranteExpanded by remember { mutableStateOf(false) }
+            val cuadranteOpciones = listOf("CERCANO", "INTERMEDIO", "LEJANO", "MUY LEJANO")
+            
+            Box(modifier = Modifier.fillMaxWidth()) {
+                OutlinedTextField(
+                    value = alimento.cuadrante,
+                    onValueChange = {},
+                    readOnly = true,
+                    label = { Text("Cuadrante de Recorrido") },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(vertical = 4.dp)
+                        .clickable { cuadranteExpanded = true }
+                )
+                
+                DropdownMenu(
+                    expanded = cuadranteExpanded,
+                    onDismissRequest = { cuadranteExpanded = false }
+                ) {
+                    cuadranteOpciones.forEach { option ->
+                        DropdownMenuItem(
+                            text = { Text(option) },
+                            onClick = {
+                                alimentos[i] = alimento.copy(cuadrante = option)
+                                cuadranteExpanded = false
+                            }
+                        )
+                    }
+                }
+            }
+            
             Text(
                 text = "Nivel: ${alimentos[i].nivel} | Categoría: ${alimentos[i].categoria}",
                 color = CharcoalGray,
